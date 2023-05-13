@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- metadata -->
+		<title>WikiPOD</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- seo -->
+        <!-- <meta name="robots" content="noindex"> -->
+		<meta name="title" content="WikiPOD">
+		<meta name="description" content="Print Wikipedia articles as paperback books delivered by mail.">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://wikipod.net/">
+		<meta property="og:title" content="WikiPOD">
+		<meta property="og:description" content="Print Wikipedia articles as paperback books delivered by mail.">
+		<meta property="og:image" content="https://wikipod.net/thumbnail.png">
+		<meta property="twitter:card" content="summary_large_image">
+		<meta property="twitter:url" content="https://wikipod.net/">
+		<meta property="twitter:title" content="WikiPOD">
+		<meta property="twitter:description" content="Print Wikipedia articles as paperback books delivered by mail.">
+		<meta property="twitter:image" content="https://wikipod.com/thumbnail.png">
+
+		<!-- styles -->
+		<link rel="stylesheet" href="styles.css">
+
+		<!-- favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+		<link rel="manifest" href="favicons/site.webmanifest">
+		
+		<!-- Google fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+		<!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<header style="margin-bottom:4rem;">
+            <h1>
+                <a href="/index.html" style="text-decoration:none;opacity:1!important;">
+                    <span class="logo-left">Wiki</span><span class="logo-right">POD</span>
+                </a>
+            </h1>
+        </header>
+        <main>
+            <div id="book-builder">
+                
+                <h2>Create Books from Wikipedia Content:</h2>
+                <ul id="content-list">
+                </ul>
+
+                <div id="article-input-wrapper">
+                    <input type="text" placeholder="Article Name or URL" aria-label="Article Name or URL" id="article-input">
+                    <button id="add" type="button" onclick="addArticle();">+</button>
+                    <div style="clear:both;"></div>
+
+                    <div id="search-results">
+                    </div>
+                </div>
+                
+                <div id="settings-row" style="display:none;">
+                    <label class="inline">
+                        <input type="checkbox" id="setting-images">
+                        Include Images
+                    </label>
+                    <label class="inline">
+                        <input type="checkbox" id="setting-tables">
+                        Include Tables
+                    </label>
+                    <label class="inline">
+                        <input type="checkbox" id="setting-infobox">
+                        Include Infobox
+                    </label>
+                    <button id="go" type="button" onclick="generateBook();">Generate!</button>
+                </div>
+                
+                <!-- <div class="col-2">
+                    <div class="col">
+                        <h3>Why Wikipedia?</h3>
+                        <p>Lipsum</p>
+
+                        <h3>Why Books?</h3>
+                        <p>Some people prefer tangible reference materials. For example, travelers can create custom travel guides, students may want to annotate physical copies, and language learners can practice with limitless volumes of any topic.</p>
+
+                        <h3>Limitations</h3>
+                        <p>4-800 pages. Books under 32 pages are printed as saddleback, which is typically a bit more expensive. For the best value, it's encouraged to combine articles into single books.</p>
+                    </div>
+                </div> -->
+
+            </div>
+            <div id="status" style="display:none;">
+                <div class="spinner">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+                <h2 role="alert"></h2>
+            </div>
+            <div id="preview" style="display:none;">
+                <div class="col-2">
+                    <div class="col">
+                        <iframe id="bookPreview" title="Book Preview" src=""></iframe>
+                    </div>
+                    <div class="col">
+                        <h3>DIY Printing (Free)</h3>
+                        <p>Print your own booklet <a href="" target="_blank">from this PDF</a>. For best results, print 2 pages per sheet and set the scale as "fit to printable area."</p>
+                        <br>
+                        <h3>Professional Printing</h3>
+                        <p id="print-desc">Get high-quality paperback books delivered by mail.</p>
+
+                        <div id="purchase-form" aria-live="polite" role="form">
+                            <input id="print-quantity" type="number" value="1" min="1" max="50">
+
+                            <button id="calcPricing" onclick="calcPricing();">Calculate Pricing</button>
+                            <button id="addShipping" onclick="addShipping();">Add Shipping Address</button>
+                            <button id="checkout" onclick="checkout();">Checkout</button>
+                            <p id="pricing-status">Loading...</p>
+
+                            <hr id="price-line">
+                            
+                            <span id="price-print"><strong>Print Cost: </strong><p></p></span>
+                            <span id="price-shipping"><strong>Shipping: </strong><p></p></span>
+                            <span id="price-tax"><strong>Taxes: </strong><p></p></span>
+
+                            <hr id="total-line">
+                            <div id="price-total"><strong>Total: </strong><p></p></div>
+
+                            
+                            <div id="address-form">
+                                <input placeholder="Name" aria-label="name" type="text" id="address-name" autocomplete="name">
+                                <input placeholder="Street Address Line 1" aria-label="address line one" type="text" id="address-street1" autocomplete="address-line1">
+                                <input placeholder="Street Address Line 2" aria-label="address line two" type="text" id="address-street2" autocomplete="address-line2">
+                                <input placeholder="City" aria-label="city" type="text" id="address-city" autocomplete="address-level2">
+                                <select placeholder="State" aria-label="State" id="address-state" autocomplete="address-level1">
+                                    <option value="" disabled selected>State</option>
+                                    <option value="AL">AL</option>
+                                    <option value="AK">AK</option>
+                                    <option value="AR">AR</option>
+                                    <option value="AZ">AZ</option>
+                                    <option value="CA">CA</option>
+                                    <option value="CO">CO</option>
+                                    <option value="CT">CT</option>
+                                    <option value="DC">DC</option>
+                                    <option value="DE">DE</option>
+                                    <option value="FL">FL</option>
+                                    <option value="GA">GA</option>
+                                    <option value="HI">HI</option>
+                                    <option value="IA">IA</option>
+                                    <option value="ID">ID</option>
+                                    <option value="IL">IL</option>
+                                    <option value="IN">IN</option>
+                                    <option value="KS">KS</option>
+                                    <option value="KY">KY</option>
+                                    <option value="LA">LA</option>
+                                    <option value="MA">MA</option>
+                                    <option value="MD">MD</option>
+                                    <option value="ME">ME</option>
+                                    <option value="MI">MI</option>
+                                    <option value="MN">MN</option>
+                                    <option value="MO">MO</option>
+                                    <option value="MS">MS</option>
+                                    <option value="MT">MT</option>
+                                    <option value="NC">NC</option>
+                                    <option value="NE">NE</option>
+                                    <option value="NH">NH</option>
+                                    <option value="NJ">NJ</option>
+                                    <option value="NM">NM</option>
+                                    <option value="NV">NV</option>
+                                    <option value="NY">NY</option>
+                                    <option value="ND">ND</option>
+                                    <option value="OH">OH</option>
+                                    <option value="OK">OK</option>
+                                    <option value="OR">OR</option>
+                                    <option value="PA">PA</option>
+                                    <option value="RI">RI</option>
+                                    <option value="SC">SC</option>
+                                    <option value="SD">SD</option>
+                                    <option value="TN">TN</option>
+                                    <option value="TX">TX</option>
+                                    <option value="UT">UT</option>
+                                    <option value="VT">VT</option>
+                                    <option value="VA">VA</option>
+                                    <option value="WA">WA</option>
+                                    <option value="WI">WI</option>
+                                    <option value="WV">WV</option>
+                                    <option value="WY">WY</option>
+                                </select>
+                                <input placeholder="Zip Code" aria-label="zip code" type="text" id="address-zip" autocomplete="postal-code">
+                                <input placeholder="Phone Number" aria-label="phone number" type="text" id="address-phone" autocomplete="tel-national">
+                                <button id="calcShipping" onclick="calcShipping();">Calculate Shipping</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            
+            <!-- <div id="socialShare">
+                <a aria-label="Facebook" href="https://www.facebook.com" target="_blank"><img src="icons/facebook-white.png" title="Share to Facebook"></a>
+                <a aria-label="Twitter" href="https://twitter.com" target="_blank"><img src="icons/twitter-white.png" title="Share to Twitter"></a>
+                <a aria-label="LinkedIn" href="https://www.linkedin.com" target="_blank"><img src="icons/linkedin-white.png" title="Share to LinkedIn"></a>
+            </div> -->
+
+            <p class="footer-text"><strong>WikiPOD v0.1</strong><br>Tyler Puckett © 2023<br><a href="/terms.html">Terms of Use</a> | <a href="https://tyler-puckett.com/#page-section-627c16fe9e1aa7738a176d15" target="_blank">Feedback</a></p>
+            
+
+            <!-- modal -->
+            <div id="modal" role="dialog" class="modal-hidden">
+                <div class="modal-content">
+                    <button aria-label="close modal" type="button" class="close-modal" onclick="toggleModal();">&times;</button>
+                    <h2>This is a modal.</h2>
+                    <p>Lorem ipsum.</p>
+                </div>
+            </div>
+            
+            <!-- scripts -->
+            <script src="script.js"></script>
+            <!--<script src="analytics.js"></script>-->
+        </footer>
+    </body>
+</html>
