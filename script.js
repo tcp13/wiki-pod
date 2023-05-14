@@ -420,7 +420,8 @@ $(document).on("keydown", function(e){
         e.preventDefault(); // prevent page scroll with arrow keys
     }
 });
-$("#article-input").on("blur", function(){
+$("#article-input").on("blur", function(e){
     // handle blur when tapping off input on mobile
+    e.preventDefault();
     $("#search-results button:first-child").focus();
 });
