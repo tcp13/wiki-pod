@@ -370,10 +370,10 @@ function searchPreview(){
                 // multi-lingual support
                 if(requestQueue[0].includes("[")){
                     let lang = requestQueue[0].split("] ")[0].replace("[", "");
-                    $("#search-results").append("<button onclick='addArticleByName(\"[" + lang + "] " + response.query.search[i].title + "\")'><div class='result-title'>" + response.query.search[i].title + "</div><div class='result-snippet'>" + response.query.search[i].snippet + "</div></button>");
+                    $("#search-results").append("<button onclick=\"addArticleByName('[" + lang + "] " + encodeURIComponent(response.query.search[i].title) + "')\"><div class='result-title'>" + response.query.search[i].title + "</div><div class='result-snippet'>" + response.query.search[i].snippet + "</div></button>");
                 }
                 else{
-                    $("#search-results").append("<button onclick='addArticleByName(\"" + response.query.search[i].title + "\")'><div class='result-title'>" + response.query.search[i].title + "</div><div class='result-snippet'>" + response.query.search[i].snippet + "</div></button>");
+                    $("#search-results").append("<button onclick=\"addArticleByName('" + encodeURIComponent(response.query.search[i].title) + "')\"><div class='result-title'>" + response.query.search[i].title + "</div><div class='result-snippet'>" + response.query.search[i].snippet + "</div></button>");
                 }
             }
         }
@@ -389,7 +389,7 @@ function searchPreview(){
 
 // add to list from search suggestions
 function addArticleByName(articleName){
-    $("#content-list").append("<li id='article-" + articleCount + "'><span tabindex='0'>" + articleName + "</span><button type='button' onclick='removeArticle(" + articleCount + ");'>x</button></li>");
+    $("#content-list").append("<li id='article-" + articleCount + "'><span tabindex='0'>" + decodeURIComponent(articleName) + "</span><button type='button' onclick='removeArticle(" + articleCount + ");'>x</button></li>");
     articleCount++;
     $("#article-input").val("").focus();
     $("#search-results").empty();
