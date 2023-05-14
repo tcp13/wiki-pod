@@ -119,8 +119,10 @@ main{
         width: 100% !important;
         margin: 1% 0px !important;
     }
-    footer{text-align:center;}
-    footer div{float:none !important;}
+    #book-builder h2{
+        line-height: 1.25;
+        margin-bottom: 1rem;
+    }
 }
 
 
