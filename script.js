@@ -419,5 +419,8 @@ $(document).on("keydown", function(e){
     if(e.which == 40 || e.which == 38){
         e.preventDefault(); // prevent page scroll with arrow keys
     }
-})
-
+});
+$("#article-input").on("blur", function(){
+    // handle blur when tapping off input on mobile
+    $("#search-results button:first-child").focus();
+});
