@@ -231,6 +231,9 @@ input, textarea, select{
 }
 select{
     min-height: calc(0.8rem + 1.5rem + 4px);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 input[type='checkbox']{
     width:initial;
