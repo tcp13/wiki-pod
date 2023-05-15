@@ -177,7 +177,7 @@ div.card-padded {
 
 
 /* USER INPUT */
-button, a.preview-fallback{
+button, a#preview-fallback{
     display: block;
     padding: 0.75rem 1.25rem;
     border: 2px solid var(--black);
@@ -187,12 +187,12 @@ button, a.preview-fallback{
     font-weight:700;
     font-size:1rem;
 }
-button:hover, a.preview-fallback{
+button:hover, a#preview-fallback{
     background: var(--primary);
     color: var(--white);
     cursor:pointer;
 }
-button:focus, a.preview-fallback{
+button:focus, a#preview-fallback{
     background: var(--primary);
     color: var(--white);
 }
@@ -418,11 +418,12 @@ button.accordion:hover{
 }
 #settings-row input[type='checkbox']{
     accent-color: var(--primary);
-    width: 0.75rem;
-    height: 0.75rem;
-    margin: 0rem 0.25rem 0px 0px;
     vertical-align: -1px;
     cursor: pointer;
+    width: auto !important;
+    height: auto !important;
+    padding: 0px !important;
+    margin: 0px 0.25rem 0px 0px !important;
 }
 #settings-row button{
     display:inline-block !important;
@@ -443,6 +444,9 @@ button.accordion:hover{
 }
 #status{
     padding-top:3rem;
+}
+#status h2{
+    line-height:1.25;
 }
 
 
