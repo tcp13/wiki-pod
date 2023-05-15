@@ -103,10 +103,10 @@ main{
 
 /* MOBILE STRUCTURE */
 @media only screen and (max-width: 1200px) {
-    body{margin:4% 12%;}
+    body{margin:6% 12%;}
 }
 @media only screen and (max-width: 1000px) {
-    body{margin:4%;}
+    body{margin:6%;}
 }
 @media only screen and (max-width: 800px) {
     div.card-padded {
@@ -122,6 +122,16 @@ main{
     #book-builder h2{
         line-height: 1.25;
         margin-bottom: 1rem !important;
+    }
+    #settings-row label{
+        display: block !important;
+    }
+    #go{
+        width: 100% !important;
+        display: block !important;
+    }
+    #add{
+        width: calc(25% - (1.5rem + 4px)) !important;
     }
 }
 
@@ -187,14 +197,17 @@ button, a#preview-fallback{
     font-weight:700;
     font-size:1rem;
 }
-button:hover, a#preview-fallback{
+button:hover, a#preview-fallback:hover{
     background: var(--primary);
     color: var(--white);
     cursor:pointer;
 }
-button:focus, a#preview-fallback{
+button:focus, a#preview-fallback:focus{
     background: var(--primary);
     color: var(--white);
+}
+a#preview-fallback{
+    text-decoration: none;
 }
 label{
     font-weight: 400;
@@ -434,6 +447,7 @@ button.accordion:hover{
     height:25rem;
 }
 #bookPreview.fail{
+    width:100%;
     height:auto !important;
 }
 #preview h3{
