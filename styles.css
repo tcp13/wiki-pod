@@ -478,10 +478,6 @@ button.accordion:hover{
     background-color:var(--white);
     border-radius:5px;
     border: 2px solid var(--black);
-    display:none;
-}
-#article-input-wrapper:focus-within #search-results{
-    display:block !important;
 }
 .searchmatch{
     font-weight:700;
