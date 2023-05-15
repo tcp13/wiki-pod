@@ -133,6 +133,21 @@ main{
     #add{
         width: calc(25% - (1.5rem + 4px)) !important;
     }
+    #price-print::after, #price-shipping::after, #price-tax::after{
+        display: block;
+        content:"";
+    }
+    #calcPricing{
+        width: calc(100% - (4rem + 8px));
+    }
+    #addShipping, #checkout{
+        display:block;
+        width:100%;
+    }
+    #calcShipping{
+        display:block;
+        width: calc(100% - 0.75rem);
+    }
 }
 
 
