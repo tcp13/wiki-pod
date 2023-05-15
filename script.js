@@ -50,7 +50,10 @@ if(params.get("project") != null && params.get("title") != null){
 
     // display book preview
     $("#book-builder").hide();
-    $("#bookPreview").attr("src", bookData.contentLink);
+    // $("#bookPreview").attr("src", bookData.contentLink);
+    PDFObject.embed(bookData.contentLink, "#bookPreview", {
+        fallbackLink: "<p>This browser does not support inline PDFs. Please <a href='[url]'>view your book preview here</a>.</p>"
+    });
     $("#preview a").attr("href", bookData.contentLink);
     $("#preview").show();
 
@@ -136,7 +139,8 @@ function generateBook(){
             // display book preview
             doneLoading();
             $("#status").hide();
-            $("#bookPreview").attr("src", bookData.contentLink);
+            // $("#bookPreview").attr("src", bookData.contentLink);
+            PDFObject.embed(bookData.contentLink, "#bookPreview");
             $("#preview a").attr("href", bookData.contentLink);
             $("#preview").show();
 

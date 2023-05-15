@@ -37,6 +37,9 @@
 
 		<!-- jQuery -->
 		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+        <!-- PDFObject -->
+        <script src="pdfobject.min.js"></script>
 	</head>
 	<body>
 		<header style="margin-bottom:4rem;">
@@ -47,6 +50,7 @@
             </h1>
         </header>
         <main>
+            <div id="pdf-demo"></div>
             <div id="book-builder">
                 
                 <h2>Create Books from Wikipedia Content:</h2>
@@ -103,7 +107,8 @@
             <div id="preview" style="display:none;">
                 <div class="col-2">
                     <div class="col">
-                        <iframe id="bookPreview" title="Book Preview" src=""></iframe>
+                        <!-- <iframe id="bookPreview" title="Book Preview" src=""></iframe> -->
+                        <div id="bookPreview"></div>
                     </div>
                     <div class="col">
                         <h3>DIY Printing (Free)</h3>
