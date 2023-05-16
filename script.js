@@ -144,6 +144,7 @@ function generateBook(){
             // update URL params
             const stateObj = {project: true};
             history.pushState(stateObj, "WikiPOD", "index.html?project=" + bookData.project + "&title=" + encodeURIComponent(bookData.title));
+            logAnalytics();
 
             // display book preview
             doneLoading();
